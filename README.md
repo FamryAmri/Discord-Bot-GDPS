@@ -4,7 +4,7 @@ A Discord Bot GDPS for your geometry dash private server
 ## How to Setup Your Bot
 Download this Repository. And then Extract the Files Zip.
 After you Extract the zip files. Upload the bot folder/directory into your database geometry dash private
-server to read files by the bot. Before you upload the bot folder please setup <a href="https://github.com/FamryAmri/Discord-Bot-GDPS/blob/master/bot/botConfig.php">botConfig.php</a> for emoji set
+server to read files by the bot. Before you upload the bot folder please setup <a href="https://github.com/FamryAmri/Discord-Bot-GDPS/blob/master/bot/botConfig.php">botConfig.php</a> for emoji set. Also Remove the (/*) and (*/) for generate Invite bot at<a href="https://github.com/FamryAmri/Discord-Bot-GDPS/blob/master/botfiles/index.js"> index.js</a> files your server so copy it at view logs heroku or in termux
 <br>
 
 ## Make Bot Discord 
@@ -96,3 +96,11 @@ After that, Tap create app <b>[ Not Need Add Pipeline ]</b>
 Connect to Github Account to Cloning your repo to heroku and find your repo you has been created. Don't forget to setup token bot at setup.json and also your host server.
 <br><br>
 ![...](http://famrygd.5v.pl/totur/image8.png)
+<br><br>
+After you connect and clone your repo. Tap Deploy Branch to cloning and running the bot. After done deploying. Goto more at up site and goto view logs to see the bot is Online or not.
+<br><br>
+![...](http://famrygd.5v.pl/totur/image9.png)
+<br><br>
+<br>
+If any problem please DM me at Discord (FamryGd#6688) with screenshot in view logs..
+So Enjoy if work..
