@@ -76,6 +76,6 @@ Follow this code
 <br>
 <code>git config --global user.email "your email github" </code>
 <br>
-Follow the code at (..or create new repository )
+and follow the code at (..or create new repository ) except echo #repo >> Readme.md
 <br><br>
 ![...](http://famrygd.5v.pl/totur/image6.png)
