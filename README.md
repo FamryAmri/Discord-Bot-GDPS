@@ -31,13 +31,10 @@ Copy your token bot and set bot permission to admin
 <br><br>
 ![...](http://famrygd.5v.pl/totur/image4.png)
 <br><br>
-
 After that, You must edit setup.json at folder botfiles and put your token. Make your prefix at the setup.json. And also put your host of gdps must be included with database folder. Like this <b>[ Not need slash at behind url ]</b>
-
 <br><br>
 <b>http://www.boomlings.com/database </b>
 <br><br>
-
 # For Hosting the bot using two devices
 
 For run/host the bot using android..
@@ -45,17 +42,13 @@ For run/host the bot using android..
 Please download termux at Google Play Store
 After you downloaded, Open the app and type..
 <br><br>
-
 <code>pkg install nodejs </code>
-
 <br><br>
 where did you put the botfiles is your path storage..
 <br><br>
-
 <code>cd /sdcard/your-path-folder/botfiles </code>
 <br><br>
 And then install all the dependecies using this code
-
 <br><br>
 <code>npm start</code>
 <br><br>
