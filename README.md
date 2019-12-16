@@ -4,7 +4,7 @@ A Discord Bot GDPS for your geometry dash private server
 ## How to Setup Your Bot
 Download this Repository. And then Extract the Files Zip.
 After you Extract the zip files. Upload the bot folder/directory into your database geometry dash private
-server to read files by the bot. Before you upload the bot folder please setup botConfig.php for emoji set
+server to read files by the bot. Before you upload the bot folder please setup <a href="https://github.com/FamryAmri/Discord-Bot-GDPS/blob/master/bot/botConfig.php">botConfig.php</a> for emoji set
 <br>
 
 ## Make Bot Discord 
