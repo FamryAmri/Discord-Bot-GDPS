@@ -1,7 +1,9 @@
 <h1 align="center">Discord Bot GDPS </h1>
+<hr>
 <div align="center">
 A Discord Bot GDPS for your geometry dash private server
 </div>
+
 # How to Setup Your Bot
 Download this Repository. And then Extract the Files Zip.
 After you Extract the zip files. Upload the bot folder/directory into your database geometry dash private
