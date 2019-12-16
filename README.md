@@ -1,8 +1,5 @@
-<h1 align="center">Discord Bot GDPS </h1>
-<hr>
-<div align="center">
+# Discord Bot GDPS
 A Discord Bot GDPS for your geometry dash private server
-</div>
 
 # How to Setup Your Bot
 Download this Repository. And then Extract the Files Zip.
@@ -32,11 +29,10 @@ Copy your token bot and set bot permission to admin
 ![...](http://famrygd.5v.pl/totur/image4.png)
 <br><br>
 After that, You must edit setup.json at folder botfiles and put your token. Make your prefix at the setup.json. And also put your host of gdps must be included with database folder. Like this <b>[ Not need slash at behind url ]</b>
-<br><br>
+<br>
 <b>http://www.boomlings.com/database </b>
-<br><br>
-# For Hosting the bot using two devices
 
+# For Hosting the bot using two devices
 For run/host the bot using android..
 <br><br>
 Please download termux at Google Play Store
