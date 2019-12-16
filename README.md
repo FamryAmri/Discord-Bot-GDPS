@@ -68,8 +68,13 @@ And then Tap create repository.
 ![...](http://famrygd.5v.pl/totur/image5.png)
 <br><br>
 
-And then for users PC just tap the import code to upload the botfiles.
-For users Android must be install termux to upload the flies.
+And then for users PC just tap the import code to upload the <a href="https://github.com/FamryAmri/Discord-Bot-GDPS/tree/master/botfiles">botfiles </a>.
+For users Android must be install termux to upload the flies. Don't forget type
+<br>
+<code>pkg install git </code>
+<br>
+<code>cd /sdcard/your-path-to-botfiles/botfiles </code>
+<br>
 Follow this code
 <br>
 <code>git config --global user.name "your username github" </code>
