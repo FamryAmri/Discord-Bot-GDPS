@@ -37,16 +37,18 @@ For run/host the bot using android..
 <br><br>
 Please download termux at Google Play Store
 After you downloaded, Open the app and type..
-<br><br>
+<br>
 <code>pkg install nodejs </code>
-<br><br>
+<br>
 where did you put the botfiles is your path storage..
-<br><br>
+<br>
 <code>cd /sdcard/your-path-folder/botfiles </code>
-<br><br>
-And then install all the dependecies using this code
-<br><br>
-<code>npm start</code>
-<br><br>
-
+<br>
+And then install all the dependecies in package.json using this code
+<br>
+<code>npm i</code>
+<br>
+Last Step to host the bot..
+<br>
+<code>node index.js </code>
 
