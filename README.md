@@ -32,8 +32,7 @@ After that, You must edit setup.json at folder botfiles and put your token. Make
 <br>
 <b>http://www.boomlings.com/database </b>
 
-# For Hosting the bot using two devices
-<h3>For run/host the bot using android</h3>
+# For Hosting the bot using android
 Please download termux at Google Play Store
 After you downloaded, Open the app and type..
 <br>
@@ -51,3 +50,20 @@ Last Step to host the bot..
 <br>
 <code>node index.js </code>
 
+# Using Heroku 
+For who want to use heroku.
+First, you need register your account github and heroku
+<br>
+Github - https://github.com/join
+Heroku - https://signup.heroku.com
+<br>
+After you register two of them
+create new repository at github
+https://github.com/new
+
+Create your own name repository and then set to private.
+And then Tap create repository.
+
+<br><br>
+![...](http://famrygd.5v.pl/totur/image5.png)
+<br><br>
