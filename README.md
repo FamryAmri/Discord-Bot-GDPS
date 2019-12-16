@@ -55,6 +55,7 @@ For who want to use heroku.
 First, you need register your account github and heroku
 <br>
 Github - https://github.com/join
+<br>
 Heroku - https://signup.heroku.com
 <br>
 After you register two of them
@@ -63,7 +64,11 @@ https://github.com/new
 
 Create your own name repository and then set to private.
 And then Tap create repository.
-
 <br><br>
 ![...](http://famrygd.5v.pl/totur/image5.png)
 <br><br>
+
+And then for users PC just tap the import code to upload the botfiles.
+For users Android must be install termux to upload the flies.
+<br><br>
+![...](http://famrygd.5v.pl/totur/image6.png)
