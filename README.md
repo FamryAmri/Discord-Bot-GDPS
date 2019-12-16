@@ -81,6 +81,7 @@ and follow the code at (..or create new repository ) except echo #repo >> Readme
 ![...](http://famrygd.5v.pl/totur/image6.png)
 <br><br>
 GoTo <a href="https://dashboard.heroku.com/apps">Heroku Dashboard </a>
+<br>
 Create new app and then fill your own name app..
 <br><br>
 ![...](http://famrygd.5v.pl/totur/image7.png)
