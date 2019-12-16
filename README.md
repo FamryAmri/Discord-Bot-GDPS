@@ -34,7 +34,6 @@ After that, You must edit setup.json at folder botfiles and put your token. Make
 
 # For Hosting the bot using two devices
 <h3>For run/host the bot using android</h3>
-<br><br>
 Please download termux at Google Play Store
 After you downloaded, Open the app and type..
 <br>
