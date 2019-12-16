@@ -70,5 +70,12 @@ And then Tap create repository.
 
 And then for users PC just tap the import code to upload the botfiles.
 For users Android must be install termux to upload the flies.
+Follow this code
+<br>
+<code>git config --global user.name "your username github" </code>
+<br>
+<code>git config --global user.email "your email github" </code>
+<br>
+Follow the code at (..or create new repository )
 <br><br>
 ![...](http://famrygd.5v.pl/totur/image6.png)
