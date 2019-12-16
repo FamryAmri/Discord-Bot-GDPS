@@ -1,0 +1,16 @@
+{
+  "name": "Discord-Bot-GDPS",
+  "version": "1.0.0",
+  "description": "This bot for gdps not same like UBGD by Alex and Open GDPS Bot by SMJS",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ."
+  },
+  "author": "FamryGd",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^11.5.1",
+    "fs": "0.0.1-security",
+    "snekfetch": "^4.0.4"
+  }
+}
