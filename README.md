@@ -82,6 +82,7 @@ and follow the code at (..or create new repository ) except echo #repo >> Readme
 <br><br>
 GoTo <a href="https://dashboard.heroku.com/apps">Heroku Dashboard </a>
 <br>
-Create new app and then fill your own name app..
+Create new app and then fill your own name app.
+After that, Tap create app <b>[ Not Need Add Pipeline ]</b>
 <br><br>
 ![...](http://famrygd.5v.pl/totur/image7.png)
