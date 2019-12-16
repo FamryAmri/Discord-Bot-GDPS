@@ -38,7 +38,7 @@ After you downloaded, Open the app and type..
 <br>
 <code>pkg install nodejs </code>
 <br>
-where did you put the botfiles is your path storage..
+where did you put the <a href="https://github.com/FamryAmri/Discord-Bot-GDPS/tree/master/botfiles">botfiles</a> is your path storage..
 <br>
 <code>cd /sdcard/your-path-folder/botfiles </code>
 <br>
