@@ -17,7 +17,7 @@ let data = search.desc;
 let buff = new Buffer(data, 'base64');
 let text = buff.toString('ascii');
 
-		fetch.get(M.host + "/api2/song.php").then ( P => {
+		fetch.get(M.host + "/bot/api/song.php").then ( P => {
 			let songId = search.songId;
 			let N = P.body.find (post => post.id === songId);
 			let noSong = new Discord.RichEmbed ()
