@@ -3,5 +3,6 @@
       "token": "BOT-TOKEN",
       "host": "http://famryamri-g.7m.pl/allafdps",
       "owner": "DISCORD USER ID",
-      "statusbot": "idle"
+      "statusbot": "idle",
+      "actionbot": "PLAYING"
 }
