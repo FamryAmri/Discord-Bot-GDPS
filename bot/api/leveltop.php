@@ -1,13 +1,14 @@
 <?php
 include "../../config/connection.php";
 include "../botConfig.php";
-
+header ("content-type: application/json");
+if (!empty ($_GET['page'])){
 $muka = $_GET['page'];
 $surat = $muka - 1;
 $top = $surat * 10;
 $start = $top;
-$end = $top + 10
-$topto = "**".$start."**/**".$end."**";
+$end = $top + 10;
+$topnum = "**".$start."**/**".$end."**";
 $id = $_GET['id'];
 
 switch ($muka){
@@ -18,8 +19,6 @@ switch ($muka){
 	$page = $muka;
 	break;
 }
-
-header ("content-type: application/json");
 
 echo '{ "top": "';
 
@@ -75,5 +74,8 @@ switch ($leader){
 	
 }
 
-echo '", "levelname": "'.$levelname.'", "page": '.$page.' ,"topTo": "'.$topto.'" }';
+echo '", "levelname": "'.$levelname.'", "page": '.$page.' ,"topTo": "'.$topnum.'" }';
+} else {
+	echo '{ "msg": "No data found" }';
+	}
 ?>

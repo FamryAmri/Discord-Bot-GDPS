@@ -1,9 +1,8 @@
 <?php
 include "../../config/connection.php";
 include "../botConfig.php";
-
 header ("content-type: application/json");
-
+if (!empty ($_GET['page'])){
 $find = $_GET['users'];
 $num = $_GET['page'];
 $rows = $num - 1;
@@ -52,3 +51,6 @@ echo $verifycoin.' `'.$row["coins"].'` | '.$stars.' `'.$star.'`\n**__'.$row["lev
 }
 
 echo '" } ';
+} else {
+	echo '{ "msg": "No data found" }';
+	}

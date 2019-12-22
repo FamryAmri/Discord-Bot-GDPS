@@ -16,7 +16,6 @@ $conn = mysqli_connect ($servername, $username, $password, $dbname);
 $query = "SELECT * FROM `accounts` WHERE ".$account;
 $sql = mysqli_query ($conn, $query);
 $row = mysqli_fetch_assoc ($sql);
-}
 
 $queria = "SELECT * FROM `roleassign` WHERE accountID='".$row['accountID']."'";
 $sqli = mysqli_query ($conn, $queria);
@@ -121,3 +120,6 @@ switch ($role['modBadgeLevel']){
 	);
 	
 echo json_encode ($array);
+} else {
+	echo '{ "msg": "No data found" }';
+	}

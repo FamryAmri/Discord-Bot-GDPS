@@ -1,7 +1,8 @@
 <?php
 include "../../config/connection.php";
 include "../botConfig.php";
-
+header ("content-type: application/json");
+if (!empty($_GET['page'])){
 $muka = $_GET['page'];
 $surat = $muka - 1;
 $top = $surat * 10;
@@ -46,8 +47,6 @@ switch ($in){
 	break;
 }
 
-header ("content-type: application/json");
-
 echo '{ "top": "';
 
 $conn = mysqli_connect($servername, $username, $password, $dbname);
@@ -70,4 +69,7 @@ while ($row = mysqli_fetch_assoc ($sql)){
 echo '`# '.$top.'`|'.$emoji.' `'.$val.'` \nUser: '.$user.'\n';
 }
 echo '", "type": "'.$type.'", "page": '.$page.', "topTo": "'.$topTo.'" }';
+} else {
+	echo '{ "msg": "No data found" }';
+	}
 ?>

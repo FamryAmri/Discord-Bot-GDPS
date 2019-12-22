@@ -2,7 +2,7 @@
 include "../../config/connection.php";
 include "../botConfig.php";
 header ("content-type: application/json");
-
+if (!empty ($_GET['ID'])){
 $find = $_GET['ID'];
 $replace = str_replace ("_", " ", $find);
 
@@ -85,7 +85,9 @@ $row = mysqli_fetch_assoc ($sql);
 	$levelVersion = $row['levelVersion'];
 
 echo '{"id":"'.$row['levelID'].'","name":"'.$play.' '.$row['levelName'].'","creator":"'.$row['userName'].'","songId":"'.$row['songID'].'","objects":"'.$row['objects'].'","coins":"'.$ckcoin.' '.$row['coins'].'","desc":"'.$levelDesc.'","likes":"'. $like.' '.$row['likes'].'","DL":"'. $download.' '.$row['downloads'].'","diff":"'.$row['starDifficulty'].'","dmns":"'.$row['starDemonDiff'].'","dmn":"'.$row['starDemon'].'","auto":"'.$row['starAuto'].'","F":"'.$row['starFeatured'].'","E":"'.$row['starEpic'].'","stars":"'. $stars.' '.$row['starStars'].'","create":"'.$create.'","UP":"'.$UP.'","pass":"'.$pass.'","ver":"'.$levelVersion.'","length":"'. $lengthlvl.' '.$length.'","unlisted":"'.$unlist.'"}';
-	
+	} else {
+		echo '{ "msg": "No data found" }';
+		}
 ?>
 	
 	
