@@ -5,14 +5,14 @@ const M = require('../setup.json');
 module.exports.run = async (client, msg, args) => {
 	let sms = await msg.channel.send ("Searching, Please wait");
 	
-	let query = args[0];
+	let query = msg.content.slice((M.prefix + "users").length + 1);
 		fetch.get(M.host + "/bot/api/accounts.php?ID=" + query).then( ac => {
 			let acc = ac.body;
 			console.log (acc);
 			let none = "1970-01-01";
 		sms.delete ();
 		if (!query) return msg.channel.send ("Give me the `AccountID` or `Playername`");
-		if (acc.register == none) return msg.channel.send ("Sorry, Not Found");
+		if (acc.msg) return msg.channel.send ("Sorry, Not Found");
 		
 		let embed = new Discord.RichEmbed()
 		.setAuthor ("Stats of " + acc.user)

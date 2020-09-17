@@ -21,18 +21,18 @@ module.exports.run = async (client, msg, args) => {
 	let ping = "**__" + prefix + "ping__**\n" + "**To:** Pong!\n" + "**howto:** `" + prefix + "ping`\n\n";
 	let about = "**__" + prefix + "about__**\n" + "**To:** check about this bot\n" + "**howto:** `" + prefix + "about`\n\n";
 	
-	if (command == "level") return msg.channel.send ( level + "Use underscore <_> for space\nFor Example:\n```" + prefix + "level unnamed_0```");
+	if (command == "level") return msg.channel.send ( level + "For Example:\n```" + prefix + "level unnamed_0```");
 	if (command == "users") return msg.channel.send ( users + "For Example:\n```" + prefix + "users RobTop\n" + prefix + "users 1```");
 	if (command == "leveltop") return msg.channel.send (leveltop + "For Example:\n```" + prefix + "leveltop 1 1```");
 	if (command == "leaderboard") return msg.channel.send (board + "For Example:\n```" + prefix + "leaderboard stars 1```")
 	if (command == "song") return msg.channel.send ( song + "For Example:\n```" + prefix + "song 1```");
-	if (command == "levelsearch") return msg.channel.send ( levelsearch + "Use underscore <_> for space\nFor Example:\n```" + prefix + "levelsearch unnamed_0 1```")
+	if (command == "levelsearch") return msg.channel.send ( levelsearch + "For Example:\n```" + prefix + "levelsearch 1 test for the check```")
 	if (command == "levelby") return msg.channel.send ( levelby + "For Example:\n```" + prefix + "RobTop 1```");
 	if (command == "weeklylevel") return msg.channel.send ( levelweekly );
 	if (command == "dailylevel" ) return msg.channel.send ( leveldaily );
 	if (command == "about" ) return msg.channel.send ( about );
 	if (command == "ping" ) return msg.channel.send ( ping );
-	if (!owo || command == "owner" ) return msg.author.send ( titleown + reboot + shut );
+	if (owo && args[0] == "owner") return msg.author.send ( titleown + reboot + shut );
 	
 	msg.channel.send ( title + users + leveltop + level + leveldaily + levelweekly + levelsearch + levelby + song + board + ping + about + "Use `" + prefix + "help <commands>` to view example for using command");
 	}

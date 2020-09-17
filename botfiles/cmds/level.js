@@ -3,20 +3,18 @@ const fetch = require ("snekfetch");
 const M = require ("../setup.json");
 
 module.exports.run = async (client, msg, args) => {
-	let id = args[0];
+	let id = msg.content.slice((M.prefix + "level ").length);
 	let sms = await msg.channel.send ("Searching, Please wait");
 	fetch.get ( M.host + '/bot/api/level1.php?ID=' + id ).then( B => {
-		console.log (B.body);
+		//console.log (B.body);
 		let search = B.body;
 		sms.delete ();
 		let none = "1970-01-01";
-		if (search.UP == none) return msg.channel.send ("Sorry, this level is not found");
+		if (search.msg) return msg.channel.send ("Sorry, this level is not found");
 		if (search == "undefined") return msg.channel.send ("Sorry this level cannot find");
-		'use strict';
 
 let data = search.desc;
-let buff = new Buffer(data, 'base64');
-let text = buff.toString('ascii');
+let text = Buffer.from (data, "base64").toString ();
 
 		fetch.get(M.host + "/bot/api/song.php").then ( P => {
 			let songId = search.songId;

@@ -5,14 +5,20 @@ const M = require ("../setup.json");
 module.exports.run = async (client, msg, args) => {
 	
 	let lvl = args[0];
-	let page = Number (args[1]);
-	let host = M.host + "/bot/api/leveltop.php?id=" + lvl + "&page=" + page;
+	let page = args[1];
+	let host;
 	if (!lvl) return msg.channel.send ("Try this command `" + M.prefix + "leveltop` `<level-id>` `<page-num>`");
-	if(!page) return msg.channel.send ("Please input page `1` for first page");
+	if (page){
+		host = M.host + "/bot/api/leveltop.php?id=" + lvl + "&page=" + page;
+		if (isNaN(page)) return msg.channel.send("Please enter a number. not a letters");
+		} else {
+			host = M.host + "/bot/api/leveltop.php?id=" + lvl;
+			}
 
 	fetch.get (host).then ( level => {
 		let body = level.body;
 		
+		if (body.msg) return msg.channel.send("Level not found");
 		if (!body.top) return msg.channel.send ("This not played or maybe not found!");
 		
 		let embed = new Discord.RichEmbed ()

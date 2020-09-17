@@ -11,11 +11,9 @@ module.exports.run = async (client, msg, args) => {
 		let none = "1970-01-01";
 		if (search.UP == none) return msg.channel.send ("Sorry, this level is not found");
 		if (!search.id) return msg.channel.send ("There nothing to set daily level");
-		'use strict';
 
 let data = search.desc;
-let buff = new Buffer(data, 'base64');
-let text = buff.toString('ascii');
+let text = Buffer.from (data, "base64").toString ();
 
 		fetch.get(M.host + "/bot/api/song.php").then ( P => {
 			let songId = search.songId;
