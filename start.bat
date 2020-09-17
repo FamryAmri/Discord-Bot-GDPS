@@ -1,0 +1,1 @@
+cd botfiles; echo Installing....; npm i; clear; echo Starting....; node .

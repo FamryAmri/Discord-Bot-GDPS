@@ -1,0 +1,11 @@
+{
+  "name": "Discord-Bot-GDPS",
+  "version": "1.0.2",
+  "description": "This bot for gdps bot is same like Open GDPS Bot by SMJS",
+  "main": "index.js",
+  "scripts": {
+    "start": "bash start.bat"
+  },
+  "author": "FamryGd",
+  "license": "MIT"
+}
