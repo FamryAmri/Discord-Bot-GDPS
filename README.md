@@ -107,3 +107,7 @@ Last one you must invite your bot. Follow in this image
 <br>
 If any problem please DM me at Discord (FamryGd#6688) with screenshot in view logs..
 So Enjoy if work..
+
+## Update
+Now you can host in [glitch](http://glitch.com) and [repl](http://repl.it)
+just clone/import this repo to it
