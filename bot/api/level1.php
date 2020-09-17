@@ -1,32 +1,39 @@
 <?php
-include "../../config/connection.php";
+include "../../incl/lib/connection.php";
 include "../botConfig.php";
 header ("content-type: application/json");
-if (!empty ($_GET['ID'])){
-$find = $_GET['ID'];
-$replace = str_replace ("_", " ", $find);
 
-if (!empty($replace)) {
-    $check = preg_replace('/[^a-zA-Z0-9]/', '', $replace);
-    if (is_numeric($check)) {
-        $level = "`levelID` = '".$check."'";
-    } else {
-        $level = "`levelName` = '".$check."'";
-    }
-    
+$check = $_GET['ID'];
+//$replace = str_replace ("_", " ", $find);
+
+if (empty($check)){
+	exit(json_encode(["msg" => "No Data Found"]));
+	}
+
+if (is_numeric($check)) {
+    $level = "`levelID` = '".$check."'";
+} else {
+    $level = "`levelName` LIKE '".$check."'";
+}
+
+/*
 $conn = mysqli_connect ($servername, $username, $password, $dbname);
 $query = "SELECT * FROM `levels` WHERE ".$level;
 }
 $sql = mysqli_query ($conn, $query);
-$row = mysqli_fetch_assoc ($sql);
+$row = mysqli_fetch_assoc ($sql);*/
 
-	switch ($row['levelDesc']){
-		case "":
-		$levelDesc = base64_encode ("No description set");
-		break;
-		case $row['levelDesc']:
+$query = $db->prepare("SELECT * FROM levels WHERE ". $level);
+$query->execute();
+$row = $query->fetch();
+if ($query->rowCount() == 0){
+	exit(json_encode(["msg" => "Not Found"]));
+	}
+
+if (empty($row['levelDesc'])){
+	$levelDesc = base64_encode ("No description set");
+	} else {
 		$levelDesc = $row['levelDesc'];
-		break;
 	}
 		
 	switch ($row['password']){
@@ -34,10 +41,11 @@ $row = mysqli_fetch_assoc ($sql);
 		$pass = "Cannot Copy";
 		break;
 		case 1:
+		case 2:
 		$pass = "Free Copy";
 		break;
-		case $row['password']:
-		$pass = $row['password'] - 1000000;
+		default:
+		$pass = substr($row["password"], 1); //slicing
 		break;
 	}
 	
@@ -85,9 +93,6 @@ $row = mysqli_fetch_assoc ($sql);
 	$levelVersion = $row['levelVersion'];
 
 echo '{"id":"'.$row['levelID'].'","name":"'.$play.' '.$row['levelName'].'","creator":"'.$row['userName'].'","songId":"'.$row['songID'].'","objects":"'.$row['objects'].'","coins":"'.$ckcoin.' '.$row['coins'].'","desc":"'.$levelDesc.'","likes":"'. $like.' '.$row['likes'].'","DL":"'. $download.' '.$row['downloads'].'","diff":"'.$row['starDifficulty'].'","dmns":"'.$row['starDemonDiff'].'","dmn":"'.$row['starDemon'].'","auto":"'.$row['starAuto'].'","F":"'.$row['starFeatured'].'","E":"'.$row['starEpic'].'","stars":"'. $stars.' '.$row['starStars'].'","create":"'.$create.'","UP":"'.$UP.'","pass":"'.$pass.'","ver":"'.$levelVersion.'","length":"'. $lengthlvl.' '.$length.'","unlisted":"'.$unlist.'"}';
-	} else {
-		echo '{ "msg": "No data found" }';
-		}
 ?>
 	
 	

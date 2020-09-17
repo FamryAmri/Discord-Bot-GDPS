@@ -1,9 +1,12 @@
 <?php
-include "../../config/connection.php";
+include "../../incl/lib/connection.php";
 include "../botConfig.php";
 header ("content-type: application/json");
-if (!empty($_GET['page'])){
+
 $muka = $_GET['page'];
+if (empty($_GET['page'])){
+	$muka = 1;
+	}
 $surat = $muka - 1;
 $top = $surat * 10;
 $start = $top;
@@ -20,7 +23,10 @@ switch ($muka){
 	break;
 }
 
-switch ($in){
+switch (strtolower($in)){
+	default:
+	exit(json_encode(["msg" => "Not Included"]));
+	break;
 	case "stars":
 	$type = "stars";
 	$emoji = $stars;
@@ -41,18 +47,20 @@ switch ($in){
 	$type = "demons";
 	$emoji = $demon;
 	break;
-	case "CP":
+	case "cp":
 	$type = "creatorPoints";
 	$emoji = $CP;
 	break;
 }
-
+$query = $db->prepare("SELECT `userName`, ".$type." FROM users WHERE isRegistered =1  ORDER BY ".$type." DESC LIMIT 10 OFFSET ". $surat * 10);
+$query->execute();
+if ($query->rowCount() == 0){
+	exit(json_encode(["msg" => "No Data Found"]));
+	}
+	
 echo '{ "top": "';
-
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-$query = "SELECT `userName`, `".$type."` FROM `users` WHERE `isRegistered`= '1' ORDER BY `users`.`".$type."` DESC LIMIT 10 OFFSET " . $surat * 10;
-$sql = mysqli_query ($conn, $query);
-while ($row = mysqli_fetch_assoc ($sql)){
+	
+foreach ($query->fetchAll() as $row){
 	switch ($row[$type]){
 		case "":
 		$val = "";
@@ -69,7 +77,4 @@ while ($row = mysqli_fetch_assoc ($sql)){
 echo '`# '.$top.'`|'.$emoji.' `'.$val.'` \nUser: '.$user.'\n';
 }
 echo '", "type": "'.$type.'", "page": '.$page.', "topTo": "'.$topTo.'" }';
-} else {
-	echo '{ "msg": "No data found" }';
-	}
 ?>

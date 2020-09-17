@@ -1,5 +1,5 @@
 <?php
-include "../../config/connection.php";
+include "../../incl/lib/connection.php";
 include "../botConfig.php";
 header ("content-type: application/json");
 
@@ -7,29 +7,32 @@ if (!empty($_GET['ID'])) {
     $userName = preg_replace('/[^a-zA-Z0-9]/', '', $_GET['ID']);
     if (is_numeric($userName)) {
         $account = "`accountID` = '".$userName."'";
+        $param = "accountID = :id";
     } else {
         $account = "`userName` = '".$userName."'";
+        $param = "userName = :id";
     }
 
-$conn = mysqli_connect ($servername, $username, $password, $dbname);
+$query = $db->prepare("SELECT * FROM accounts WHERE ". $param);
+$query->execute([":id" => $userName]);
+$row = $query->fetch();
+if ($query->rowCount() == 0){
+	exit(json_encode(array("msg" => "No Data Found")));
+	}
 
-$query = "SELECT * FROM `accounts` WHERE ".$account;
-$sql = mysqli_query ($conn, $query);
-$row = mysqli_fetch_assoc ($sql);
+$query2 = $db->prepare("SELECT roleID FROM roleassign WHERE accountID = :id");
+$query2->execute([":id" => $row["accountID"]]);
+$roleID = $query2->fetchColumn();
 
-$queria = "SELECT * FROM `roleassign` WHERE accountID='".$row['accountID']."'";
-$sqli = mysqli_query ($conn, $queria);
-$riw = mysqli_fetch_assoc ($sqli);
+$query3 = $db->prepare("SELECT modBadgeLevel FROM roles WHERE roleID = :id");
+$query3->execute([":id" => $roleID]);
+$level = $query->fetchColumn();
 
-$quary = "SELECT * FROM `roles` WHERE roleID='".$riw['roleID']."'";
-$swl = mysqli_query ($conn, $quary);
-$role = mysqli_fetch_assoc ($swl);
+$query4 = $db->prepare("SELECT * FROM users WHERE extID = :98");
+$query4->execute([":98" => $row["accountID"]]);
+$userinfo = $query4->fetch();
 
-$quero = "SELECT * FROM `users` WHERE `extID` = '".$row['accountID']."'";
-$sqlo = mysqli_query($conn, $quero);
-$rew = mysqli_fetch_assoc ($sqlo);
-
-	switch ($rew['isBanned']){
+	switch ($userinfo['isBanned']){
 		case 0:
 		$ban = "Not Ban";
 		break;
@@ -65,7 +68,7 @@ $rew = mysqli_fetch_assoc ($sqlo);
 			break;
 		}
 
-		switch ($rew['isCreatorBanned']){
+		switch ($userinfo['isCreatorBanned']){
 		case 0:
 		$cpban = "Not Ban";
 		break;
@@ -74,8 +77,8 @@ $rew = mysqli_fetch_assoc ($sqlo);
 		break;
 		}
 
-switch ($role['modBadgeLevel']){
-	case 0:
+switch ($level){
+	default:
 	$modlevel = "";
 	$stat = "No Modded";
 	break;
@@ -110,16 +113,16 @@ switch ($role['modBadgeLevel']){
 	"Admin" => $admin,
 	"mod" => $modlevel,
 	"stat" => $stat,
-	"stars" => $stars." ".$rew['stars'],
-	"demon" => $demon." ".$rew['demons'],
+	"stars" => $stars." ".$userinfo['stars'],
+	"demon" => $demon." ".$userinfo['demons'],
 	"Ban" => $ban,
-	"CP" => $CP." ".$rew['creatorPoints'],
+	"CP" => $CP." ".$userinfo['creatorPoints'],
 	"cpBanned" => $cpban,
-	"G_Coins" => $goldCoins." ".$rew['coins'],
-	"S_Coins" => $coins." ".$rew['userCoins'],
+	"G_Coins" => $goldCoins." ".$userinfo['coins'],
+	"S_Coins" => $coins." ".$userinfo['userCoins'],
 	);
 	
 echo json_encode ($array);
 } else {
-	echo '{ "msg": "No data found" }';
+	echo json_encode(array("msg" => "No Data Found"));
 	}

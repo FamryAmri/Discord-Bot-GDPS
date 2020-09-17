@@ -1,16 +1,22 @@
 <?php
-include "../../config/connection.php";
+include "../../incl/lib/connection.php";
 include "../botConfig.php";
 header ("content-type: application/json");
-if (!empty ($_GET['page'])){
+
 $muka = $_GET['page'];
+if (empty($muka)){
+	$muka = 1;
+	}
 $surat = $muka - 1;
 $top = $surat * 10;
 $start = $top;
 $end = $top + 10;
 $topnum = "**".$start."**/**".$end."**";
 $id = $_GET['id'];
-
+if (empty($_GET["id"])){
+	exit(json_encode(["msg" => "No Data Found"]));
+	}
+	
 switch ($muka){
 	default:
 	$page = 1;
@@ -20,22 +26,20 @@ switch ($muka){
 	break;
 }
 
-echo '{ "top": "';
-
-//connect to db
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-
 //for select levelname
-$queria = "SELECT * FROM `levels` WHERE `levelID`='".$id."'";
-$sqli = mysqli_query ($conn, $queria);
-$raw = mysqli_fetch_assoc ($sqli);
-$levelname = $raw['levelName'];
+$levename = $db->prepare("SELECT levelName FROM levels WHERE levelID = :id");
+$levename->execute([":id" => $id]);
+$levelname = $levename->fetchColumn();
 
+/*if ($levename->rowCount() == 0){
+	exit(json_encode(["msg" => "No Data Found"]));
+	}*/
+echo '{ "top": "';
 //For Top
-$query = "SELECT * FROM `levelscores` WHERE `levelID`= ".$id." ORDER BY `levelscores`.`percent` DESC LIMIT 10 OFFSET " . $surat * 10;
-$sql = mysqli_query ($conn, $query);
-while ($row = mysqli_fetch_assoc ($sql)){
-	
+$query = $db->prepare("SELECT * FROM levelscores WHERE levelID = :id ORDER BY percent DESC LIMIT 10 OFFSET ".$surat * 10);
+$query->execute([":id" => $id]);
+
+foreach ($query->fetchAll() as $row){
 	switch ($row['coins']){
 		case 0:
 		$coin = "No Coin";
@@ -51,12 +55,11 @@ while ($row = mysqli_fetch_assoc ($sql)){
 		break;
 	}
 	
-	$querio = "SELECT * FROM `accounts` WHERE `accountID` = '".$row['accountID']."'";
-	$np = mysqli_query ($conn, $querio);
-	$account = mysqli_fetch_assoc ($np);
+	$query2 = $db->prepare("SELECT userName FROM accounts WHERE accountID = :id");
+	$query2->execute([":id" => $row["accountID"]]);
 	
 	$top = $top + 1;
-	$user = $account['userName'];
+	$user = $query2->fetchColumn();
 	$percent = $row['percent'];
 	
 $leader = '`# '.$top.'`| `'.$percent.'%` | '.$coin.' \nUser: '.$user.'\n';
@@ -75,7 +78,4 @@ switch ($leader){
 }
 
 echo '", "levelname": "'.$levelname.'", "page": '.$page.' ,"topTo": "'.$topnum.'" }';
-} else {
-	echo '{ "msg": "No data found" }';
-	}
 ?>

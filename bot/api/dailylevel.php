@@ -1,9 +1,15 @@
 <?php
-include "../../config/connection.php";
+include "../../incl/lib/connection.php";
 include "../botConfig.php";
 header ("content-type: application/json");
 $time = time ();
-$conn = mysqli_connect ($servername, $username, $password, $dbname);
+$type = 1;
+if (empty($_GET["type"])){
+	$type = 0;
+	}
+
+//mysqli
+/*$conn = mysqli_connect ($servername, $username, $password, $dbname);
 
 $queria = "SELECT * FROM `dailyfeatures` WHERE `timestamp` < '".$time."' AND `type` = '".$_GET['type']."' ORDER BY `dailyfeatures`.`timestamp` DESC";
 $sqli = mysqli_query($conn, $queria);
@@ -13,16 +19,30 @@ $current = $raw['timestamp'] - $time;
 
 $query = "SELECT * FROM `levels` WHERE `levelID` = ".$raw['levelID'];
 $sql = mysqli_query ($conn, $query);
-$row = mysqli_fetch_assoc ($sql);
+$row = mysqli_fetch_assoc ($sql);*/
+
+$query = $db->prepare("SELECT levelID FROM dailyfeatures WHERE timestamp < :time AND type = :type ORDER BY timestamp DESC");
+$query->execute([":time" => $time, ":type" => $type]);
+$levelID = $query->fetchColumn();
+
+$query2 = $db->prepare("SELECT * FROM levels WHERE levelID = :12");
+$query2->execute([":12" => $levelID]);
+$row = $query2->fetch();
 
 	switch ($row['levelDesc']){
-		case "":
+		default:
 		$levelDesc = base64_encode ("No description set");
 		break;
 		case $row['levelDesc']:
 		$levelDesc = $row['levelDesc'];
 		break;
 	}
+	
+if (empty($row["levelDesc"])){
+	$levelDesc = base64_encode("No description set");
+	} else {
+		$levelDesc = $row["levelDesc"];
+		}
 		
 	switch ($row['password']){
 		case 0:

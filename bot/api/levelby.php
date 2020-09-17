@@ -1,32 +1,35 @@
 <?php
-include "../../config/connection.php";
+include "../../incl/lib/connection.php";
 include "../botConfig.php";
 header ("content-type: application/json");
-if (!empty ($_GET['page'])){
-$find = $_GET['users'];
-$num = $_GET['page'];
-$rows = $num - 1;
-
-$replace = str_replace ("_", " ", $find);
-if(!empty($replace)){
-	$check = preg_replace ("/[^a-zA-Z0-9]/", "", $replace);
+if (!empty ($_GET['users'])){
+	$check = $_GET['users'];
+	$num = $_GET['page'];
+	if (empty($num)){
+		$num = 1;
+		}
+	$rows = $num - 1;
+	} else {
+		exit(json_encode(["msg" => "No Data Found"]));
+		}
+		
 	if (is_numeric($check)){
 		$users = "`extID` = ".$check;
 		} else {
 			$users = "`userName` LIKE '".$check."'";
 			}
     
-$conn = mysqli_connect ($servername, $username, $password, $dbname);
-
 $query = "SELECT * FROM `levels` WHERE ". $users." ORDER BY `levels`.`uploadDate` DESC LIMIT 10 OFFSET ". $rows * 10;
-}
-$sql = mysqli_query ($conn, $query);
-$raw = mysqli_fetch_assoc ($sql);
+$query = $db->prepare($query);
+$query->execute();
+
+if ($query->rowCount() == 0){
+	exit(json_encode(["msg" => "No Data Found"]));
+	}
 
 echo '{ "users": "'.$raw['userName'].'", "levels": "';
 
-while ($row = mysqli_fetch_assoc ($sql)){
-	
+foreach ($query->fetchAll() as $row){
 	switch ($row['starCoins']){
 		case 0:
 		$verifycoin = $uncoins;
@@ -51,6 +54,3 @@ echo $verifycoin.' `'.$row["coins"].'` | '.$stars.' `'.$star.'`\n**__'.$row["lev
 }
 
 echo '" } ';
-} else {
-	echo '{ "msg": "No data found" }';
-	}

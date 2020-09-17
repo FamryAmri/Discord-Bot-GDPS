@@ -1,13 +1,13 @@
 <?php
-include "../../config/connection.php";
+include "../../incl/lib/connection.php";
 include "../botConfig.php";
 header ("content-type: application/json");
 
-$conn = mysqli_connect ($servername, $username, $password, $dbname);
 $query = "SELECT * FROM `songs`";
-$sql = mysqli_query ($conn, $query);
-while ($row = mysqli_fetch_assoc ($sql)){
+$query = $db->prepare($query);
+$query->execute();
 
+foreach ($query->fetchAll() as $row){
 $url = str_replace ("%2F", "/", $row['download']);
 $dlA = str_replace ("%3A", ":", $url);
 $dl = $dlA;
