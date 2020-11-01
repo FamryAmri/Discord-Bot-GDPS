@@ -36,13 +36,13 @@ After that, You must edit setup.json at folder botfiles. Put your token and also
 Please download termux at Google Play Store
 After you downloaded, Open the app and type..
 <br>
-<code>pkg install nodejs </code>
+<code>pkg i nodejs </code>
 <br>
 where did you put the <a href="https://github.com/FamryAmri/Discord-Bot-GDPS/tree/master/botfiles">botfiles</a> is your path storage..
 <br>
 <code>cd /sdcard/your-path-folder/botfiles </code>
 <br>
-And then install all the dependecies in package.json using this code
+And then install all the dependencies in package.json using this code
 <br>
 <code>npm i</code>
 <br>
