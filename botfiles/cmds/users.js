@@ -8,13 +8,11 @@ module.exports.run = async (client, msg, args) => {
 	let query = msg.content.slice((M.prefix + "users").length + 1);
 		fetch.get(M.host + "/bot/api/accounts.php?ID=" + query).then( ac => {
 			let acc = ac.body;
-			console.log (acc);
-			let none = "1970-01-01";
 		sms.delete ();
 		if (!query) return msg.channel.send ("Give me the `AccountID` or `Playername`");
 		if (acc.msg) return msg.channel.send ("Sorry, Not Found");
 		
-		let embed = new Discord.RichEmbed()
+		let embed = new Discord.MessageEmbed()
 		.setAuthor ("Stats of " + acc.user)
 		.setDescription (
 acc.stars + "\n" + acc.demon + "\n" + acc.S_Coins + "\n" + acc.CP )

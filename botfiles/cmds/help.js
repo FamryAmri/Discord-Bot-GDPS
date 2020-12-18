@@ -17,6 +17,7 @@ module.exports.run = async (client, msg, args) => {
 	let levelby = "**__" + prefix + "levelby__**\n" + "**To:** check level from player\n" + "**Howto:** `" + prefix + "levelby <playername> or <ID> <page>`\n\n";
 	let levelsearch = "**__" + prefix + "levelsearch__**\n" + "**To:** for search levels from GDPS \n" + "**Howto:** `" + prefix + "levelsearch <query> <page>`\n\n";
 	let song = "**__" + prefix + "song__**\n" + "**To:** check song information\n" + "**howto:** `" + prefix + "song <songID>` \n\n";
+	let songadd = "**__" + prefix + "songAdd__**\n" + "**To:** insert song into this gdps\n" + "**howto:** `" + prefix + "songAdd <url-soundcloud>` \n\n";
 	let board = "**__" + prefix + "leaderboard__**\n" + "**To:** check Top Player with type of `demon`, `coins`, `gold.coins`, `CP`, and also `stars`\n" + "**howto:** `" + prefix + "leaderboard <type> <page>`\n\n";
 	let ping = "**__" + prefix + "ping__**\n" + "**To:** Pong!\n" + "**howto:** `" + prefix + "ping`\n\n";
 	let about = "**__" + prefix + "about__**\n" + "**To:** check about this bot\n" + "**howto:** `" + prefix + "about`\n\n";
@@ -34,7 +35,7 @@ module.exports.run = async (client, msg, args) => {
 	if (command == "ping" ) return msg.channel.send ( ping );
 	if (owo && args[0] == "owner") return msg.author.send ( titleown + reboot + shut );
 	
-	msg.channel.send ( title + users + leveltop + level + leveldaily + levelweekly + levelsearch + levelby + song + board + ping + about + "Use `" + prefix + "help <commands>` to view example for using command");
+	msg.channel.send ( title + users + leveltop + level + leveldaily + levelweekly + levelsearch + levelby + song + songadd + board + ping + about + "Use `" + prefix + "help <commands>` to view example for using command");
 	}
 	
 module.exports.help = {

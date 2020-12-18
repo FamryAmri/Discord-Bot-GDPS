@@ -26,7 +26,7 @@ module.exports.run = async (client, msg, args) => {
 	if (!body) return msg.channel.send ("Please use `stars` or `demon`");
 	if (!body.top) return msg.channel.send ("Page leaderboard `" + type + "` is not found");
 	
-	let embed = new Discord.RichEmbed ()
+	let embed = new Discord.MessageEmbed ()
 	.setTitle("Leaderboards of " + body.type )
 	.addField ("Top " + body.topTo , body.top)
 	.addField ( "__For Next Page__ ", "`" + M.prefix + "leaderboard " + type + " <page-num> `")

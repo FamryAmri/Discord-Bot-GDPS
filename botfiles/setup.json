@@ -1,8 +1,9 @@
 {
-      "prefix": "gd.",
-      "token": "BOT-TOKEN",
+	  "READ_THIS": "BOT_TOKEN must be edit at .env",
+      "prefix": "ts.",
       "host": "http://famryamri-g.7m.pl/allafdps",
-      "owner": "DISCORD USER ID",
+      "owner": "DISCORD-USER-ID",
       "statusbot": "idle",
-      "actionbot": "PLAYING"
+      "actionbot": "PLAYING",
+      "channel_gdpsStatus": "CHANNEL_ID"
 }

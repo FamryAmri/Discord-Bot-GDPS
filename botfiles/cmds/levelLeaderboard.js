@@ -21,7 +21,7 @@ module.exports.run = async (client, msg, args) => {
 		if (body.msg) return msg.channel.send("Level not found");
 		if (!body.top) return msg.channel.send ("This not played or maybe not found!");
 		
-		let embed = new Discord.RichEmbed ()
+		let embed = new Discord.MessageEmbed ()
 		.setTitle (":bar_chart: Leaderboard from Level " + body.levelname)
 		.addField("Top " + body.topTo , body.top)
 		.addField ("More Command", "`" + M.prefix + "` `leveltop` `" + lvl + "` `<page-num>`\n`" + M.prefix + "` `level` `" + lvl + "`")

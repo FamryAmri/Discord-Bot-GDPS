@@ -1,5 +1,7 @@
 module.exports.run = async (client, msg, args) => {
-	msg.channel.send ("Pong!, I'm online..");
+	let from = msg.createdTimestamp;
+	let m = await msg.channel.send ("pinging");
+	m.edit("Pong, my ping is " + `${"`"}${m.createdTimestamp - from}ms${"`"}`);
 	}
 	
 module.exports.help = {

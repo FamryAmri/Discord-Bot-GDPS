@@ -15,7 +15,7 @@ module.exports.run = async (client, msg, args) => {
 		
 		if (!body.levels) return msg.channel.send ("That level is not available in page " + page + "\nor maybe didnt have yet");
 		
-		let embed = new Discord.RichEmbed ()
+		let embed = new Discord.MessageEmbed ()
 		.setTitle (body.users + "'s Levels")
 		.setDescription (body.levels)
 		.addField ("__More Command__", "**For next page** \n `" + prefix + "levelby " + users + " <page-num>`\n**For Check Level**\n`" + prefix + "level <id>`")

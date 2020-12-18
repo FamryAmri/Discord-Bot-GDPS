@@ -28,7 +28,7 @@ Copy your token bot and set bot permission to admin
 <br><br>
 ![...](http://famrygd.5v.pl/totur/image4.png)
 <br><br>
-After that, You must edit setup.json at folder botfiles. Put your token and also your <a href="https://support.discordapp.com/hc/en-us/articles/360000291932">user id</a>. Make your prefix at the setup.json. And also put your host of gdps must be included with database folder. Like this <b>[ Not need slash at behind url ]</b>
+After that, You must edit setup.json and .env at folder botfiles. Put your token and also your <a href="https://support.discordapp.com/hc/en-us/articles/360000291932">user id</a>. Make your prefix at the setup.json. And also put your host of gdps must be included with database folder. Like this <b>[ Not need slash at behind url ]</b>
 <br>
 <b>http://www.boomlings.com/database </b>
 
@@ -110,4 +110,4 @@ So Enjoy if work..
 
 ## Update
 Now you can host in [glitch](http://glitch.com) and [repl](http://repl.it)
-just clone/import this repo to it
+just clone/import this repo to it. (Please UptimeRobot to keep online the bot)

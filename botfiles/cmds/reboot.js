@@ -6,7 +6,7 @@ module.exports.run = async (client, msg, args) => {
 	if (!owo) return;
 	msg.channel.send('See You Again ;)').then((m) => {
         client.destroy().then(() => {
-          client.login(M.token).then (() => {
+          client.login(process.env.BOT_TOKEN).then (() => {
           	m.edit('Hello, I am Back!');
           });
         });

@@ -14,7 +14,7 @@ module.exports.run = async (client, msg, args) => {
 		let find = lvl.body;
 		
 		if (!find.query) return msg.channel.send ("Your search query is not found");
-		let embed = new Discord.RichEmbed ()
+		let embed = new Discord.MessageEmbed ()
 		.setTitle (":mag_right: Search Query for " + level)
 		.setDescription (find.query)
 		.addField ("__More Commands__", "**For next page**\n`" + prefix + "levelsearch <query> <page-num>`\n" + "**For Check Level**\n`" + prefix + "level <id>`")

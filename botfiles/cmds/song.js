@@ -12,7 +12,7 @@ module.exports.run = async (client, msg, args) => {
 		if (!id) return msg.channel.send ("Give me the `Song ID` or `Song Name`");
 		if (!entry) return msg.channel.send ("This song is not exist");
 
-		let embed = new Discord.RichEmbed ()
+		let embed = new Discord.MessageEmbed ()
 		.setTitle("Information Song")
 		.setDescription ("ID Song: **" + entry.id + "**\n" + "Name: **" + entry.name + "**\n" + "Size: **" + entry.size + "**\n" + entry.download )
 		.addField ("Stats Of Song" , "This song is **" + entry.Info + "**" )

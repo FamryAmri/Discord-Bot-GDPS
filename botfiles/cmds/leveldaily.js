@@ -18,7 +18,7 @@ let text = Buffer.from (data, "base64").toString ();
 		fetch.get(M.host + "/bot/api/song.php").then ( P => {
 			let songId = search.songId;
 			let N = P.body.find (post => post.id === songId);
-			let noSong = new Discord.RichEmbed ()
+			let noSong = new Discord.MessageEmbed ()
 		.addField ( search.name  + ' By ' + search.creator ,  'Description: ' + "\n" + `**${text}**` + "\n")
 		.addField ("Stat of level: ", 
 search.coins  + "\n" + search.stars + "\n" + search.DL + "\n" + search.likes + "\n" + search.length )
@@ -30,7 +30,7 @@ ID Level: **${search.id}**` + "\n" + `Level: **${search.unlisted}**` + "\n" +`Ob
 .setFooter ("Created at " + search.create + " | Updated at " + search.UP )
 
 if (!N) return msg.channel.send ("This level for today", {embed: noSong});
-		let embed = new Discord.RichEmbed ()
+		let embed = new Discord.MessageEmbed ()
 		.addField ( search.name + ' By ' + search.creator , 'Description: ' + "\n" + `**${text}**` + "\n" )
 		.addField ("Stat of level: ", search.coins + "\n" + search.stars + "\n" + search.DL + "\n" + search.likes + "\n" + search.length )
         .addField ('Song Info', `
