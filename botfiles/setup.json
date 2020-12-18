@@ -1,5 +1,5 @@
 {
-	  "READ_THIS": "BOT_TOKEN must be edit at .env",
+      "READ_THIS": "BOT_TOKEN must be edit at .env",
       "prefix": "ts.",
       "host": "http://famryamri-g.7m.pl/allafdps",
       "owner": "DISCORD-USER-ID",
