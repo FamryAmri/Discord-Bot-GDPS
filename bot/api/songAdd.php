@@ -15,7 +15,7 @@ if (!empty($link)){
 	$query = $db->prepare("SELECT ID FROM songs WHERE download = :download");
 	$query->execute([':download' => $link]);
 	$id = $query->fetchColumn();
-	$row = $query->rowCount();
+	$count = $query->rowCount();
 	
 	if($count !== 0){
 		echo $id;
