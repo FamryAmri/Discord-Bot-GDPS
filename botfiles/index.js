@@ -1,4 +1,5 @@
 require("dotenv/config");
+const bot = require("./bot");
 const M = require("./setup.json");
 const app = require("express")();
 const status = M.statusbot;
@@ -40,41 +41,8 @@ client.on ("ready", async () => {
 			},
 		status: status
 		});
-	
-	if (!isNaN(M.channel_gdpsStatus)){
-		let channel = await client.channels.fetch(M.channel_gdpsStatus);
-		//set channel status of gdps
-		setInterval(() => {
-			req.get(M.host + "/bot/status.php", async(err, res, status) => {
-				let last = channel.messages;
-				let latest = await last.fetch();
-				let msg = latest.find(msg => msg.author.id == client.user.id);
-				let embed = new Discord.MessageEmbed();
-				
-				let dbStatus = "OK :green_circle:";
-				let httpdStatus = "OK :green_circle:";
-				
-				console.log(res.statusCode);
-				if (res.statusCode !==200){
-					dbStatus = "ERROR :red_circle:";
-					httpdStatus = "ERROR :red_circle:";
-					} else if (status !== "1"){
-						dbStatus = "ERROR :red_circle:";
-						}
-					
-				let db = "**Database Status**: " + dbStatus;
-				let hosting = "**Server Status**: " + httpdStatus;
-				
-				embed.setTitle("GDPS Status");
-				embed.setDescription(db + "\n" + hosting + "\nThis will be refresh in 60 sec");
-				if (!msg){
-					channel.send(embed);
-					} else {
-						msg.edit(embed);
-						}
-				});
-			}, 60000);
-		}
+	if (!isNaN(M["channel"]["gdpsstatus"])) bot.gdpsstatus(client, M);
+	if (!isNaN(M["channel"]["ratestatus"])) bot.ratenotif(client, M);
 	
 	if (process.env.GENERATE_INVITE_BOT == "true"){
 		try { let link = await client.generateInvite(["ADMINISTRATOR"]);
