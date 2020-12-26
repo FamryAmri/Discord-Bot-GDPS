@@ -1,9 +1,12 @@
 {
       "READ_THIS": "BOT_TOKEN must be edit at .env",
       "prefix": "gd.",
-      "host": "http://famryamri-g.7m.pl/allafdps",
-      "owner": "DISCORD-USER-ID",
-      "statusbot": "idle",
+      "host": "http://famryamri-p.7m.pl/databruh",
+      "owner": "user_id",
+      "statusbot": "online",
       "actionbot": "PLAYING",
-      "channel_gdpsStatus": "CHANNEL_ID"
+      "channel": {
+      "gdpsstatus": "channel_id",
+      "ratestatus": "channel_id"
+      }
 }
