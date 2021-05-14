@@ -111,3 +111,5 @@ So Enjoy if work..
 ## Update
 Now you can host in [glitch](http://glitch.com) and [repl](http://repl.it)
 just clone/import this repo to it. (Please UptimeRobot to keep online the bot)
+
+Credits: [Cvolton](http://github.com/cvolton)
