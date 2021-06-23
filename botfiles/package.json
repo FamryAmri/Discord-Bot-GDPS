@@ -1,6 +1,6 @@
 {
   "name": "Discord-Bot-GDPS",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "This bot for gdps not same like UBGD by Alex and Open GDPS Bot by SMJS",
   "main": "index.js",
   "scripts": {
