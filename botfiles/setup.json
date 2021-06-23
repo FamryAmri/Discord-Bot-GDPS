@@ -1,10 +1,16 @@
 {
       "READ_THIS": "BOT_TOKEN must be edit at .env",
-      "prefix": "gd.",
-      "host": "http://famryamri-p.7m.pl/databruh",
+      "prefix": "0.",
+      "host": "http://localhost/dbgdps",
       "owner": "user_id",
       "statusbot": "online",
       "actionbot": "PLAYING",
+      "gdpsup": {
+            "READ_THIS": "change gdps, directory and turn if needed. turn is if you are using gdps song uploader use On",
+            "gdps": true,
+            "directory": "gdpsup",
+            "turn": "Off"
+      },
       "channel": {
       "gdpsstatus": "channel_id",
       "ratestatus": "channel_id"
