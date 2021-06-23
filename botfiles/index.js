@@ -56,16 +56,47 @@ client.on ("ready", async () => {
 	
 client.on ('message', async msg => {
 	if(msg.author.bot) return;
-	if (msg.channel.type === "dm") return;
 	
 	let msgArray = msg.content.split (" ");
 	let command = msgArray[0];
 	let args = msgArray.slice(1);
 
 	if (!command.startsWith(M.prefix)) return;
-	
-	let cmd = client.commands.get(command.slice (M.prefix.length));
-	if (cmd) cmd.run (client, msg, args);
+
+	if (msg.channel.type === "text"){
+		let cmd = client.commands.get(command.slice (M.prefix.length));
+		if (cmd) cmd.run (client, msg, args);
+	} else if (msg.channel.type === 'dm'){
+		let commandDM = command.slice(M.prefix.length);
+		if (commandDM == 'upload'){
+			let a024 = '.';
+			if (msg.author.id == M.owner) a024 = ', please edit in setup.json and restart the bot';
+			if (M.gdpsup.turn == "Off") return msg.channel.send(`This command has been blocked${a024}`);
+			let uri = M.host + `/${M.gdpsup.directory}/`;
+			if (!M.gdpsup.gdps) uri = M.gdpsup.directory;
+			let attach = msg.attachments;
+			let url = attach.first().url;
+			let spliter = url.split('.')
+			let slash = url.split('/')
+			let filetype = spliter[spliter.length - 1]
+			let title = slash[slash.length - 1].slice(0, 1 - (filetype.length + 2))
+			
+			// json post ready
+			let requesting = {
+				title: title,
+				discord: process.env.GDPS_KEY,
+				url: url,
+				filetype: filetype,
+				size: attach.first().size
+			}
+			req.post(uri + 'stuff.php', {
+    			form: requesting
+			},(err, res, body) => {
+    			if (res.statusCode !==200) return msg.channel.send('Error: script not found/installed');
+    			return msg.channel.send(body);
+			});
+		} else if (commandDM == 'ping') return msg.channel.send('Pong!');
+	}
 	});
 	
 client.login(process.env.BOT_TOKEN);
