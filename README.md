@@ -1,5 +1,9 @@
-# Discord Bot GDPS
+# Discord Bot GDPS 
 A Discord Bot GDPS for your geometry dash private server
+
+## WARN
+This is beta release, you can try it without any issues for it. You can use [1.0.4](https://github.com/FamryAmri/Discord-Bot-GDPS/releases/tag/1.0.4) ver instead.
+**Beta ver will give some error**
 
 ## How to Setup Your Bot
 Download this Repository. And then Extract the Files Zip.
