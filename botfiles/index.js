@@ -9,7 +9,24 @@ const client =  new Discord.Client();
 const fs = require("fs");
 const req = require("request");
 client.commands = new Discord.Collection();
+keycard = new Discord.Collection();
 const typefiles = "js";
+
+function pass_session (id, pass, timexpire=30){
+	keycard.set(id, pass);
+	setTimeout (()=>{
+		keycard.delete(id);
+		console.log(keycard);
+	}, timexpire * 1000);
+}
+
+//main function for gauntlets
+async function setupG (uri, keycard){
+	//check setup done
+	req.get(`${uri}/bot/api/gauntlets.php?doing=1&keycard=${keycard}`, (err, res, body)=>{
+		if (body == '-1') return;
+	});
+}
 
 app.get("/", (req, res) => {
 	res.send("OK");
@@ -95,8 +112,86 @@ client.on ('message', async msg => {
     			if (res.statusCode !==200) return msg.channel.send('Error: script not found/installed');
     			return msg.channel.send(body);
 			});
-		} else if (commandDM == 'ping') return msg.channel.send('Pong!');
-	}
+			} else if (commandDM == 'gauntlet'){
+				let query = ''
+				let lvls = ''
+				let gaurun = false;
+				
+				if (args[0] == 'setup'){
+					if (!args[1]) return msg.channel.send('Input password (`space` are not needed)');
+					gaurun = true;
+					query += `doing=1`
+					query += `&keycard=${msg.author.id}`
+				} else if (args[0] == 'add') {
+					let idsgau = '';
+					let type = [false, "Fire", "Ice", "Poison", "Shadow", "Lava", "Bonus", "Chaos", "Demon", "Time", "Crystal", "Magic", "Spike", "Monster", "Doom", "Death"];
+					type.slice(1).forEach((str, index) => {
+						idsgau += `${index + 1} = ${str}\n`
+					});
+					//idsgau.slice(0, idsgau.length - 1);
+					if (!args[1]) return msg.channel.send('```'+idsgau+'```\nExample: `' + M.prefix + 'gauntlet '+args[0]+' <gauntlet id> <lvls>(1,2,3,4,5)`');
+					if (!type[args[1]]) return msg.channel.send('Invalid ID');
+					query += 'doing=3&'
+					gaurun = true;
+					query += `keycard=${keycard.get(msg.author.id) || "0"}&`
+					query += `gauntid=${args[1]}&`
+					lvls = args[2].split(',');
+					query += `l1=${lvls[0]}&`
+					query += `l2=${lvls[1]}&`
+					query += `l3=${lvls[2]}&`
+					query += `l4=${lvls[3]}&`
+					query += `l5=${lvls[4]}`
+					// console.log(query);
+				} else if (args[0] == 'forgotpass') {
+					return msg.channel.send('forgot password? please delete verify files at ' + `||${M.host}/bot/api/verify||\n and setup`)
+				} else if (args[0] == 'changepass') {
+					if (!args[1]) return msg.channel.send('Input password (`space` are not needed)');
+					gaurun = true;
+					query += 'doing=5&'
+					query += `keycard=${keycard.get(msg.author.id) || "0"}&`
+					query += `keycard1=${args[1]}`;
+				} else if (args[0] == 'update') {
+					let idsgau = '';
+					let type = [false, "Fire", "Ice", "Poison", "Shadow", "Lava", "Bonus", "Chaos", "Demon", "Time", "Crystal", "Magic", "Spike", "Monster", "Doom", "Death"];
+					type.slice(1).forEach((str, index) => {
+						idsgau += `${index + 1} = ${str}\n`
+					});
+					//idsgau.slice(0, idsgau.length - 1);
+					if (!args[1]) return msg.channel.send('```'+idsgau+'```\nExample: `' + M.prefix + 'gauntlet '+args[0]+' <gauntlet id> <level1=id,level5=id>`');
+					if (!type[args[1]]) return msg.channel.send('Invalid ID');
+					query += 'doing=4&'
+					query += `gauntid=${args[1]}&`
+					query += `query=${args[2]}&`
+					query += `keycard=${keycard.get(msg.author.id) || "0"}`
+				} else if (args[0] == 'show') {
+					query +='doing=2&'
+				} else if (args[0] == 'login'){
+					if (args[1] == 'help') return msg.channel.send(`Example:\`\ ${M.prefix}gauntlet login <password> <time session in seconds: Optional>\`\ `);
+					pass_session(msg.author.id, args[1], args[2] || 30);
+					console.log(keycard);
+					return msg.channel.send('Login session ready');
+				} else {
+					let helpgau = '__**HELP SECTIONS**__\n'
+					//if (args[0] !=='help') helpgau += `\`\ ${M.prefix}gauntlet ${args[0]} \`\ is not found`
+					helpgau +='use this command with gauntlet cmd\n`add,setup,login,<allcmd> help`'
+					helpgau += '\nExample: `' + M.prefix + 'gauntlet add help`'; 
+					return msg.channel.send(helpgau);
+				}
+				
+				if (!keycard.has(msg.author.id)) return msg.channel.send('Your session login is end or not ready, please login with `' + `${M.prefix}gauntlet login <password>\`\ `);
+				if (!gaurun) return;
+				req.get(`${M.host}/bot/api/gauntlets.php?${query}`, (err, res, body)=>{
+					console.log(body);
+					if (body == '-1') return msg.channel.send("INFO: Setup is not ready, use this command for setup `" + `${M.prefix}gauntlet setup\`\ `);
+					if (body == '-2') return msg.channel.send("INFO: You are not allowed to use it (Invalid)");
+					if (body == '-3') return msg.channel.send("INFO: Added success");
+					if (body == '-4') return msg.channel.send("INFO: Updated success");
+					if (body == '-5') return msg.channel.send("INFO: Not exists");
+					if (body == '-6') return msg.channel.send("INFO: Already exists");
+					if (body == '-7') return msg.channel.send("INFO: success change password");
+				});
+			} else if (commandDM == 'ping') return msg.channel.send('Pong!');
+		}	
 	});
 	
 client.login(process.env.BOT_TOKEN);
