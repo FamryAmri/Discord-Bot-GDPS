@@ -37,7 +37,7 @@ After that, You must edit setup.json and .env at folder botfiles. Put your token
 <b>http://www.boomlings.com/database </b>
 
 ## For Hosting the bot using android
-Please download termux at Google Play Store
+Please download termux at Termux Site
 After you downloaded, Open the app and type..
 <br>
 <code>pkg i nodejs </code>
